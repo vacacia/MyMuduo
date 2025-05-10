@@ -6,7 +6,9 @@
 class Buffer
 {
 public:
+    // 前置区域的大小
     static const size_t kCheapPrepend = 8;
+    // 初始缓冲区大小
     static const size_t kInitialSize = 1024;
 
     explicit Buffer(size_t initialSize = kInitialSize):
@@ -15,22 +17,19 @@ public:
         writerIndex_(kCheapPrepend)
     {}
 
-    // 返回缓冲区可读数据的长度
+
     size_t readableBytes() const{
         return writerIndex_ - readerIndex_;
     }
-    // 返回缓冲区可写数据的长度
     size_t writableBytes() const{
         return buffer_.size() - writerIndex_;
     }
-
-    // 返回缓冲区中前置区域的长度
-    // 前置区域是指当前可读数据之前的那部分空间
+    // 返回缓冲区中前置区域的长度，前置区域是指当前可读数据之前的那部分空间
     size_t prependableBytes() const{
         return readerIndex_;
     }
     
-    // 返回缓冲区中可读数据的起始地址
+    // 计算出可读数据区域的第一个字节的内存地址
     const char* peek() const{
         return begin() + readerIndex_;
     }
@@ -39,7 +38,6 @@ public:
     void retrieve(size_t len){
         if(len < readableBytes()){
             readerIndex_ += len;
-
         }else{
             retrieveAll();
         }
@@ -49,7 +47,6 @@ public:
         writerIndex_ = kCheapPrepend;
     }
     
-    // ?????????????
     std::string retrieveAsString(size_t len){
         std::string result(peek(), len);
         retrieve(len);
@@ -100,11 +97,8 @@ private:
     // 扩容缓冲区
     void makeSpace(size_t len);
 
-
-    std::vector<char> buffer_;
     // [readerIndex_, writerIndex_)是缓冲区中的有效数据
-    // readerIndex_是缓冲区中第一个有效数据的位置
+    std::vector<char> buffer_;
     size_t readerIndex_;
-    // writerIndex_是缓冲区中最后一个有效数据的下一个位置
     size_t writerIndex_;
 };

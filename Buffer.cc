@@ -5,7 +5,7 @@
 #include <errno.h> //errno
 #include <sys/uio.h> //iovec
 
-// 从fd中读取数据到缓冲区
+// 从fd中读取数据，写入到缓冲区
 ssize_t Buffer::readFd(int fd, int* saveErrno)
 {
     char extrabuf[65536] = {0};
@@ -41,7 +41,7 @@ ssize_t Buffer::readFd(int fd, int* saveErrno)
     return n;
     
 }
-// 从缓冲区中读取数据到fd
+// 从缓冲区中读取数据，写入到fd
 ssize_t Buffer::writeFd(int fd, int* saveErrno)
 {
     ssize_t n = ::write(fd, peek(), readableBytes());

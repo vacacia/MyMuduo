@@ -76,7 +76,6 @@ void EventLoop::loop(){
         // 执行当前EventLoop事件循环需要处理的回调操作
         // mainLoop事先注册一个回调cb,wakeup subloop后,执行下面的方法(是mainLoop注册的cb)
         doPendingFunctors();
-
     }
     LOG_INFO("EventLoop %p stop looping \n", this);
     looping_ = false;

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/acacia/mymuduo325/lib/libmymuduo.pdb"
-  "/home/acacia/mymuduo325/lib/libmymuduo.so"
+  "../lib/libmymuduo.pdb"
+  "../lib/libmymuduo.so"
   "CMakeFiles/mymuduo.dir/Acceptor.o"
   "CMakeFiles/mymuduo.dir/Acceptor.o.d"
   "CMakeFiles/mymuduo.dir/Buffer.o"
