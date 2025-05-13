@@ -188,7 +188,8 @@ CMakeFiles/mymuduo.dir/TcpConnection.o: \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/atomic \
- /home/MyCode/MyMuduo/EventLoop.h /home/MyCode/MyMuduo/CurrentThread.h \
+ /home/MyCode/MyMuduo/Channel.h /home/MyCode/MyMuduo/EventLoop.h \
+ /home/MyCode/MyMuduo/CurrentThread.h \
  /usr/include/x86_64-linux-gnu/sys/syscall.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
@@ -204,6 +205,6 @@ CMakeFiles/mymuduo.dir/TcpConnection.o: \
  /usr/include/c++/11/limits /usr/include/c++/11/ctime \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
- /usr/include/c++/11/bits/unique_lock.h /home/MyCode/MyMuduo/Socket.h \
- /home/MyCode/MyMuduo/Channel.h /home/MyCode/MyMuduo/Logger.h \
- /usr/include/string.h /usr/include/strings.h
+ /usr/include/c++/11/bits/unique_lock.h /home/MyCode/MyMuduo/Logger.h \
+ /home/MyCode/MyMuduo/Socket.h /usr/include/string.h \
+ /usr/include/strings.h

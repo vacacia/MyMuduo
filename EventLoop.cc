@@ -137,7 +137,7 @@ void EventLoop::wakeup(){
 
 // EventLoop的方法->Poller的方法
 void EventLoop::updateChannel(Channel* channel){
-    LOG_INFO("EventLoop-updateChannel!!!!!");
+    //LOG_INFO("EventLoop-updateChannel!!!!!");
     poller_->updateChannel(channel);
 }
 void EventLoop::removeChannel(Channel* channel){

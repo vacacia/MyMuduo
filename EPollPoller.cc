@@ -59,12 +59,7 @@ Timestamp EPollPoller::poll(int timeoutMs, ChannelList *activeChannels) {
 void EPollPoller::updateChannel(Channel *channel) {
     const int index = channel->index();
     // LOG_INFO("func = %s, fd = %d, events = %d, index = %d", __FUNCTION__, channel->fd(), channel->events(), index);
-    LOG_INFO("func=%s => channel_fd=%d channel_events=%d channel_index=%d \n", __FUNCTION__, channel->fd(), channel->events(), index);
-
-    // 偷换了位置，可能有bug
-    // int fd = channel->fd();
-
-    // 
+    //LOG_INFO("func=%s => channel_fd=%d channel_events=%d channel_index=%d \n", __FUNCTION__, channel->fd(), channel->events(), index);
     if(index == kNew || index == kDeleted){
         // 新加入的channel
         if(index == kNew){
@@ -85,7 +80,7 @@ void EPollPoller::updateChannel(Channel *channel) {
 
 }
 
-// 从Poller里删除, 不过删除后还存在于Poller的channels里
+// 从Poller里删除,
 // 删除前，保证 
 // 1. 对于Poller：fd 在channels(poller的一个map)里存在
 // 2. 对于Poller：fd 对应的 channel 类型无误
@@ -98,9 +93,8 @@ void EPollPoller::updateChannel(Channel *channel) {
 void EPollPoller::removeChannel(Channel *channel) {
     int fd = channel->fd();
     channels_.erase(fd);
-
     
-    LOG_INFO("func = %s, fd = %d", __FUNCTION__, fd);
+    //LOG_INFO("func = %s, fd = %d", __FUNCTION__, fd);
 
     int index = channel->index();
     if(index == kAdded){

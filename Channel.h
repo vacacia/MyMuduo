@@ -66,7 +66,7 @@ private:
     const int fd_; // Poller 监听的对象
     int events_; // 注册 fd 感兴趣的事件
     int revents_; // poller 返回的具体发生的事件
-    int index_;
+    int index_; // 这个 channel 的状态
 
     std::weak_ptr<void> tie_;
     bool tied_;

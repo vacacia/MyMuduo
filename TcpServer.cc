@@ -74,8 +74,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr) {
   InetAddress localaddr(local);
 
   // 4. 创建新连接 - TcpConnection 对象
-  TcpConnectionPtr conn(
-      new TcpConnection(ioLoop, connName, sockfd, localaddr, peerAddr));
+  TcpConnectionPtr conn(new TcpConnection(ioLoop, connName, sockfd, localaddr, peerAddr));
   connections_[connName] = conn;
 
   // 5. 设置连接回调

@@ -6,7 +6,6 @@
 #include "Buffer.h"
 #include "Timestamp.h"
 
-
 #include <atomic>
 #include <string>
 #include <memory>
