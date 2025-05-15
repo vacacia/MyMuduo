@@ -31,6 +31,8 @@ Timestamp EPollPoller::poll(int timeoutMs, ChannelList *activeChannels) {
     // 因为执行频繁，LOG_DEBUG合适
     // %d - int, %u - unsigned int,  %lu - long unsigned int(size_t)
     LOG_DEBUG("func=%s => fd TOTAL count=%lu\n", __FUNCTION__, channels_.size());
+    // 一次取出events_.size()个事件。
+    // 有可能这一次没全部取出，不过EventLoop的 loop() 方法会在一个循环中反复调用 poller_->poll()，下次调用也会继续处理剩余事件
     int numEvents = ::epoll_wait(epollfd_, &*events_.begin(), static_cast<int>(events_.size()), timeoutMs);
     int saveErrno = errno;
     Timestamp now(Timestamp::now());

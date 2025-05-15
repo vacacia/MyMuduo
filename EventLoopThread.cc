@@ -31,30 +31,30 @@ EventLoop* EventLoopThread::startLoop(){
     // 下面复杂的逻辑只是为了确保事件循环线程成功创建
     {
         std::unique_lock<std::mutex> lock(mutex_);
-        while(loop_ == nullptr){
-            // wait 会阻塞主线程，并自动释放mutex锁
-            cond_.wait(lock);
-        }
-        // 只要唤醒了主线程，就会取得锁，loop_就不会被修改，这步赋值不会出错
+        // 使用带谓词的wait，当loop_不为nullptr时返回
+        cond_.wait(lock, [this]{return loop_ != nullptr;});
         loop = loop_;
     }
+    // 防御性编程
+    // 在临界区内获取共享状态的快照，然后在临界区外使用这个快照
     return loop;
 }
 
-// 在单独的新线程运行
-// 事件循环线程的实际工作是在 threadFunc() 函数中完成
+
 void EventLoopThread::threadFunc(){
-    // 创建独立的EventLoop，和线程一一对应
     EventLoop loop;
+    // 可能存在的初始化
     if(callback_){
         callback_(&loop);
     }
 {
     std::unique_lock<std::mutex> lock(mutex_);
     loop_ =  &loop;
+    // 通知 startLoop() 的 while(loop_ == nullptr)
     cond_.notify_one();
 }
     loop.loop();
+    // 再次获取锁
     std::unique_lock<std::mutex> lock(mutex_);
     loop_ = nullptr;
 }

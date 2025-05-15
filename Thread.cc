@@ -15,7 +15,7 @@ Thread::Thread(ThreadFunc func, const std::string &name)
     }
 
 Thread::~Thread(){
-    if(started_ && joined_){
+    if(started_ && !joined_){
         thread_->detach();
     }
 }
@@ -26,7 +26,7 @@ void Thread::start(){
     sem_t sem;
     sem_init(&sem, false, 0);
 
-    // 用unique_ptr会更好吗 
+    // 用unique_ptr会更好
     thread_ = std::make_shared<std::thread>([&](){
         tid_ = CurrentThread::tid();
         sem_post(&sem);
